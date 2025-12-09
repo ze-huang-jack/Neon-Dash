@@ -469,6 +469,29 @@ export const GeometryDashGame: React.FC = () => {
     };
   }, []);
 
+  // Handle screen orientation changes
+  useEffect(() => {
+    const handleOrientationChange = () => {
+      // Resize canvas when orientation changes
+      const canvas = canvasRef.current;
+      if (canvas) {
+        // Force a redraw after orientation change
+        setTimeout(() => {
+          canvas.width = CANVAS_WIDTH;
+          canvas.height = CANVAS_HEIGHT;
+        }, 100);
+      }
+    };
+
+    window.addEventListener('orientationchange', handleOrientationChange);
+    window.addEventListener('resize', handleOrientationChange);
+
+    return () => {
+      window.removeEventListener('orientationchange', handleOrientationChange);
+      window.removeEventListener('resize', handleOrientationChange);
+    };
+  }, []);
+
   // Controls
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -500,13 +523,17 @@ export const GeometryDashGame: React.FC = () => {
 
 
   return (
-    <div className="relative group cursor-pointer">
+    <div className="relative group cursor-pointer w-full h-full flex items-center justify-center">
       <canvas
         ref={canvasRef}
         width={CANVAS_WIDTH}
         height={CANVAS_HEIGHT}
         className="rounded-lg shadow-2xl bg-black block select-none"
-        style={{ maxWidth: '100%', height: 'auto' }}
+        style={{ 
+          maxWidth: '100%', 
+          height: 'auto',
+          aspectRatio: `${CANVAS_WIDTH}/${CANVAS_HEIGHT}`
+        }}
         onClick={jump}
       />
       

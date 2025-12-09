@@ -1,4 +1,4 @@
-export const CANVAS_WIDTH = 800;
+export const CANVAS_WIDTH = 1200;
 export const CANVAS_HEIGHT = 450;
 
 // Physics
