@@ -1,0 +1,5 @@
+{
+  "name": "Neon Dash React",
+  "description": "A high-octane Geometry Dash clone featuring procedural generation, physics-based platforming, and neon aesthetics built with React and HTML5 Canvas.",
+  "requestFramePermissions": []
+}
